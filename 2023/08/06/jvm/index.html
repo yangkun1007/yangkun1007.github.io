@@ -4,17 +4,22 @@
   <meta charset="utf-8">
   
   
-  <title>Hexo</title>
+  <title>jvm | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
+  <meta name="description" content="1.JVM的位置2.JVM体系结构  +—————————————–+  |           Java Application              |  +—————————————–+                   |                   v  +—————————————–+  |           JVM (Java Virtual Machine)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jvm">
 <meta property="og:url" content="http://example.com/2023/08/06/jvm/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.JVM的位置2.JVM体系结构  +—————————————–+  |           Java Application              |  +—————————————–+                   |                   v  +—————————————–+  |           JVM (Java Virtual Machine)">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/Users/yangkun/Documents/%E5%91%A8%E6%8A%A5/pics/image-20230806105217620.png">
+<meta property="og:image" content="http://example.com/Users/yangkun/Documents/%E5%91%A8%E6%8A%A5/pics/image-20230806105236924.png">
 <meta property="article:published_time" content="2023-08-06T13:09:38.545Z">
-<meta property="article:modified_time" content="2023-08-06T13:09:38.545Z">
+<meta property="article:modified_time" content="2023-08-06T13:37:45.111Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/Users/yangkun/Documents/%E5%91%A8%E6%8A%A5/pics/image-20230806105217620.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -83,13 +88,131 @@
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      jvm
+    </h1>
+  
+
+      </header>
+    
     <div class="e-content article-entry" itemprop="articleBody">
       
-        
+        <p><img src="/Users/yangkun/Documents/%E5%91%A8%E6%8A%A5/pics/image-20230806105217620.png" alt="image-20230806105217620"></p>
+<p><img src="/Users/yangkun/Documents/%E5%91%A8%E6%8A%A5/pics/image-20230806105236924.png" alt="image-20230806105236924"></p>
+<h1 id="1-JVM的位置"><a href="#1-JVM的位置" class="headerlink" title="1.JVM的位置"></a>1.JVM的位置</h1><h1 id="2-JVM体系结构"><a href="#2-JVM体系结构" class="headerlink" title="2.JVM体系结构"></a>2.JVM体系结构</h1><p>  +—————————————–+<br>  |           Java Application              |<br>  +—————————————–+<br>                   |<br>                   v<br>  +—————————————–+<br>  |           JVM (Java Virtual Machine)     |<br>  +—————————————–+<br>  |    Class Loader                         |<br>  |      |                                  |<br>  |      v                                  |<br>  |    +———————–+            |<br>  |    |    Class Files       |            |<br>  |    +———————–+            |<br>  |                                        |<br>  |    Runtime Data Area                   |<br>  |    +———————–+            |<br>  |    |  Method Area        |             |<br>  |    +———————–+            |<br>  |    |  Heap               |             |<br>  |    +———————–+            |<br>  |    |  VM Stack           |             |<br>  |    +———————–+            |<br>  |    |  Native Method Stack|             |<br>  |    +———————–+            |<br>  |    |  Program Counter    |             |<br>  |    +———————–+            |<br>  |                                        |<br>  |    Execution Engine                    |<br>  |    +———————–+            |<br>  |    |  Bytecode Interpreter|            |<br>  |    +———————–+            |<br>  |                                        |<br>  |    Garbage Collector                   |<br>  |    +———————–+            |<br>  |    |  Collect and Manage  |            |<br>  |    |  Memory             |            |<br>  |    +———————–+            |<br>  |                                        |<br>  |    Native Interface                    |<br>  |    +———————–+            |<br>  |    |  JNI (Java Native    |            |<br>  |    |  Interface)         |            |<br>  |    +———————–+            |<br>  |                                        |<br>  +—————————————–+</p>
+<p>JVM（Java虚拟机）的体系结构是一个复杂的软件系统，它负责<strong>将Java字节码转换为机器码并执行</strong>。JVM的体系结构主要由以下几个关键组成部分组成：</p>
+<ol>
+<li><p><strong>类加载器（Class Loader）</strong>：负责将Java类文件加载到JVM中。JVM使用类加载器将类文件从磁盘加载到内存，并生成对应的Class对象。</p>
+</li>
+<li><p><strong>运行时数据区域（Runtime Data Area）</strong>：JVM的内存被划分为不同的数据区域，用于存储不同类型的数据。主要包括：</p>
+<ul>
+<li><p><strong>方法区（Method Area）</strong>：存储类的结构信息、静态变量、常量等。在Java 8之前，它还被用来存储永久代（Permanent Generation）。（这就像是一个大型的图书馆，里面存放着所有建筑的设计图纸、材料清单和规格说明。每个建筑的信息都在这里，包括大小、形状、颜色等。例如，如果你要建造一座房子，你需要从这里找到关于房子的所有信息。）</p>
+</li>
+<li><p><strong>堆（Heap）</strong>：存储对象实例，包括通过new关键字创建的对象。堆是垃圾回收的主要区域。（堆就像是一个仓库，用来存放各种建筑的实际部件。每个建筑都有不同的材料、家具和设备。例如，你可以在堆中存放房子的砖块、家具、电器等。）</p>
+</li>
+<li><p><strong>虚拟机栈（VM Stack）</strong>：存储方法调用的局部变量、操作数栈、方法返回值等。（虚拟机栈就像是你的记事本，用来记录每个建筑工程的进度和需要的材料。每当你开始一个新的建筑工程，你都会在记事本上写下需要的材料清单和步骤。例如，你决定在城市中建造一座新的大楼，你会在记事本上列出需要的材料和步骤。）</p>
+</li>
+<li><p><strong>本地方法栈（Native Method Stack）</strong>：用于执行本地方法（使用非Java代码实现的方法）。（本地方法栈就像是一个特殊的记事本，用来记录一些特殊的建筑工程，这些工程需要使用一些你自己制造的特殊材料。例如，你决定在城市中建造一座高塔，但是你需要用到一种特殊的神奇材料，这个记事本就会帮助你记录这些特殊的材料。）</p>
+</li>
+<li><p><strong>程序计数器（Program Counter Register）</strong>：记录当前线程执行的字节码指令地址。（程序计数器就像是一个标记，告诉你当前你在建造哪个建筑，以及下一步要做什么。它就像是你在城市地图上标记出你当前的位置，以及你要前往的下一个目的地。）</p>
+</li>
+</ul>
+</li>
+<li><p><strong>执行引擎（Execution Engine）</strong>：负责执行字节码指令，将字节码翻译为机器码并在处理器上执行。</p>
+</li>
+<li><p><strong>垃圾回收器（Garbage Collector）</strong>：负责自动回收不再使用的对象，释放内存空间。JVM有多种垃圾回收算法和策略。</p>
+</li>
+<li><p><strong>本地方法接口（Native Interface）</strong>：允许Java代码与本地（非Java）代码进行交互，比如调用操作系统的API。</p>
+</li>
+<li><p><strong>本地方法库（Native Method Library）</strong>：包含一组本地方法的动态链接库，可以被本地方法调用。</p>
+</li>
+</ol>
+<p>这只是JVM体系结构的一个概览，实际上它更为复杂。JVM的设计和实现取决于不同的Java虚拟机厂商和版本，因此可能会存在一些差异。如果你想深入了解JVM的体系结构，可以阅读相关的JVM规范和文档，以及一些专业的Java虚拟机的内部实现资料。</p>
+<h1 id="3-类加载器"><a href="#3-类加载器" class="headerlink" title="3.类加载器"></a>3.类加载器</h1><h1 id="4-双亲委派机制"><a href="#4-双亲委派机制" class="headerlink" title="4.双亲委派机制"></a>4.双亲委派机制</h1><p>当 Java 程序加载类时，Java 虚拟机（JVM）会使用一种叫做双亲委派（Parent Delegation）的机制来管理类加载的过程。这个机制的核心思想是让更高级别的类加载器负责加载类，只有在父加载器找不到类的情况下，子加载器才会尝试加载。</p>
+<p>想象你在玩一个多层次的游戏，每个层次都有一个“导游”，当你需要某个物品时，你首先询问当前层次的导游，如果他没有，就会让你去上一层次的导游询问。这样，你在最高层次的导游那里找不到物品之前，不会一直往下询问。</p>
+<p>双亲委派机制类似于这个游戏中的导游层次结构：</p>
+<ol>
+<li><p><strong>引导类加载器（Bootstrap Class Loader）</strong>：</p>
+<ul>
+<li>这是最顶层的类加载器，负责加载 Java 的核心类库，如<code>java.lang</code>包中的类。</li>
+<li>它通常由 JVM 实现，是用 C++ 编写的，因此在 Java 程序中不可见。</li>
+</ul>
+</li>
+<li><p><strong>扩展类加载器（Extension Class Loader）</strong>：</p>
+<ul>
+<li>这个加载器在引导类加载器之后，负责加载 Java 扩展库，如<code>javax</code>包中的类。</li>
+<li>它是用 Java 编写的，可以在 Java 程序中看到。</li>
+</ul>
+</li>
+<li><p><strong>应用程序类加载器（Application Class Loader）</strong>：</p>
+<ul>
+<li>也被称为系统类加载器，负责加载你自己编写的 Java 类。</li>
+<li>这个加载器是最底层的加载器，通常是开发者自定义的。</li>
+</ul>
+</li>
+</ol>
+<p>这个机制的优势在于避免了类的重复加载和冲突。当一个类需要被加载时，JVM 会首先询问引导类加载器，如果它找不到，会询问扩展类加载器，如果还找不到，最终才会询问应用程序类加载器。如果在这些层次中找到了需要的类，就会加载并返回，否则会报类找不到的异常。</p>
+<p>这样的设计确保了类加载的一致性和可靠性，防止了不同加载器之间的类冲突。同时，也允许开发者通过编写自定义的类加载器，来实现一些特殊的加载需求，比如从网络中加载类或者实现类隔离等。</p>
+<p>总之，双亲委派机制是 Java 类加载的一种重要机制，它帮助保持了类的一致性，防止了类冲突，同时也为开发者提供了灵活性和扩展性。</p>
+<p>双亲委派机制（Parent Delegation Mechanism）是Java类加载机制的一种重要策略。它是为了保证类的一致性和安全性而设计的，确保在不同的类加载器之间加载类时不会发生冲突。</p>
+<p>这个机制的核心思想是：当一个类加载器需要加载某个类时，它首先会委托其父加载器去尝试加载这个类，只有在父加载器找不到该类的情况下，才会由该加载器自己尝试加载。这个过程一直向上递归，直到达到最顶层的引导类加载器（Bootstrap Class Loader）。如果引导类加载器也找不到，那么就会回到子加载器，最终加载失败并报错。</p>
+<p>这种机制的好处在于，它确保了核心类库（如<code>java.lang</code>包中的类）始终由引导类加载器加载，而不会被应用程序的类加载器替代。这样可以防止用户自定义的类库意外地替代核心类库，保障了Java的稳定性和一致性。</p>
+<p>举个例子来说明双亲委派机制：</p>
+<p>假设有一个名为<code>com.example.MyClass</code>的类需要加载。首先，应用程序类加载器会委托扩展类加载器尝试加载它，如果扩展类加载器找不到，就会继续委托引导类加载器。如果引导类加载器仍然找不到，那么会回到应用程序类加载器，然后它再尝试加载。</p>
+<p>这种方式确保了类的加载是按照固定的顺序进行的，避免了类的多次加载和冲突。如果每个加载器都能加载任意类，就可能导致不同加载器加载同一个类，从而引发类不一致的问题。</p>
+<p>总结而言，双亲委派机制是一种类加载的层次结构，保证了类的加载顺序和一致性，为Java提供了稳定和可靠的类加载环境。</p>
+<h1 id="5-沙箱安全机制"><a href="#5-沙箱安全机制" class="headerlink" title="5.沙箱安全机制"></a>5.沙箱安全机制</h1><p>沙箱安全机制是一种用于保护计算机系统免受恶意代码和不受信任的程序影响的安全策略。它创建了一个隔离的执行环境，限制了程序的权限和访问范围，以防止恶意行为对系统造成损害。</p>
+<p>想象你正在玩沙箱中的沙子，你可以在沙箱中自由玩耍，但无法影响到沙箱外的环境。沙箱安全机制就是类似的概念，它为程序提供了一个受限的环境，在这个环境中，程序可以执行特定的操作，但无法越过边界影响到系统的其他部分。</p>
+<p>在计算机领域，沙箱安全机制常常用于以下情境：</p>
+<ol>
+<li><p><strong>Web 浏览器</strong>：Web 浏览器通常使用沙箱来隔离网页上的 JavaScript 代码，防止恶意代码从浏览器中访问用户的计算机或者窃取用户的敏感信息。</p>
+</li>
+<li><p><strong>操作系统进程</strong>：在某些情况下，操作系统会将不同的应用程序或进程放置在独立的沙箱中运行，以防止恶意软件或者应用程序相互干扰或者破坏系统。</p>
+</li>
+<li><p><strong>Java 虚拟机</strong>：在 Java 虚拟机中，沙箱安全机制通过限制程序的资源访问和权限，防止恶意 Java 代码对系统进行攻击或者影响。</p>
+</li>
+<li><p><strong>移动应用</strong>：移动应用通常会使用沙箱来隔离不同的应用程序，以防止一个应用访问另一个应用的数据或者执行恶意操作。</p>
+</li>
+</ol>
+<p>沙箱安全机制通过限制程序的权限、资源访问和行为范围，有效地减少了潜在的风险和威胁。然而，需要注意的是，沙箱并非绝对安全，一些高级的恶意代码可能会绕过沙箱限制。因此，综合使用其他安全措施和最佳实践是保护系统安全的重要组成部分。</p>
+<p>JVM（Java虚拟机）和沙箱安全机制密切相关，因为Java语言及其运行时环境是最著名的采用沙箱安全机制的例子之一。</p>
+<p>JVM的沙箱安全机制可以用以下方式理解：</p>
+<ol>
+<li><p><strong>代码隔离</strong>：Java程序在JVM中运行，JVM为每个程序提供一个隔离的执行环境。每个Java程序都运行在自己的沙箱中，防止程序干扰彼此或者对底层系统造成损害。</p>
+</li>
+<li><p><strong>访问控制</strong>：JVM通过类加载机制、访问控制和权限设置来控制程序对系统资源的访问。程序只能访问它被授权访问的资源，如文件、网络、操作系统接口等。</p>
+</li>
+<li><p><strong>内存管理</strong>：JVM使用内存管理和垃圾回收机制，确保一个Java程序无法访问或干扰其他程序的内存空间。这也有助于防止缓冲区溢出等内存安全问题。</p>
+</li>
+<li><p><strong>字节码执行</strong>：Java程序被编译为字节码，由JVM的执行引擎逐条执行。这个过程中，JVM可以检查和控制每一条指令的执行，以确保程序不会越过预定的边界。</p>
+</li>
+<li><p><strong>安全管理器</strong>：Java提供了安全管理器（SecurityManager）机制，允许程序定义安全策略和权限。安全管理器可以控制哪些操作是允许的，哪些是禁止的。</p>
+</li>
+</ol>
+<p>总之，JVM通过各种机制和措施，为Java程序提供了沙箱安全机制，限制了程序的权限和访问范围，防止恶意代码对系统造成威胁。这使得Java成为一种相对安全的编程语言，特别适用于网络和分布式环境，如Web浏览器中运行的Applet、移动应用等。虽然JVM的沙箱安全机制很强大，但也需要在实际应用中注意其他安全措施，以确保系统的安全性。</p>
+<h1 id="6-Native"><a href="#6-Native" class="headerlink" title="6.Native"></a>6.Native</h1><h1 id="7-pc寄存器"><a href="#7-pc寄存器" class="headerlink" title="7.pc寄存器"></a>7.pc寄存器</h1><h1 id="8-方法区"><a href="#8-方法区" class="headerlink" title="8.方法区"></a>8.方法区</h1><h1 id="9-栈"><a href="#9-栈" class="headerlink" title="9.栈"></a>9.栈</h1><h1 id="10-堆"><a href="#10-堆" class="headerlink" title="10.堆"></a>10.堆</h1><h1 id="11-堆内存优化"><a href="#11-堆内存优化" class="headerlink" title="11.堆内存优化"></a>11.堆内存优化</h1><p>堆内存调优是针对Java虚拟机（JVM）中的堆内存进行优化的过程。堆内存是用于存储Java程序运行时创建的对象实例和数据的区域。堆内存调优旨在通过合理的配置和参数设置，优化内存分配、垃圾回收和对象生命周期管理，以提高程序性能、减少垃圾回收频率，并有效地利用内存资源。</p>
+<p>为什么要进行堆内存调优呢？</p>
+<ol>
+<li><p><strong>性能优化</strong>：合理的堆内存设置可以提高程序的性能。如果堆内存设置过小，可能导致频繁的垃圾回收，影响程序的响应速度。反之，如果堆内存设置过大，可能导致内存浪费，降低了程序的整体性能。</p>
+</li>
+<li><p><strong>避免内存泄漏</strong>：内存泄漏是指程序中的对象无法被垃圾回收，导致内存占用逐渐增加。通过调优堆内存，可以更容易地检测和排除内存泄漏问题，确保对象在不再使用时能够被正确释放。</p>
+</li>
+<li><p><strong>优化垃圾回收</strong>：垃圾回收是清理不再使用的对象以释放内存空间的过程。合理的堆内存设置可以减少垃圾回收的频率和成本，从而降低系统的停顿时间，提高程序的响应能力。</p>
+</li>
+<li><p><strong>避免OutOfMemoryError</strong>：如果堆内存设置过小，可能会导致内存溢出错误（OutOfMemoryError），使程序崩溃。通过适当的堆内存调优，可以避免这种情况的发生。</p>
+</li>
+<li><p><strong>资源管理</strong>：堆内存是有限的系统资源，需要合理分配和管理。通过调优堆内存，可以更好地控制系统的资源使用，提高资源的利用率。</p>
+</li>
+</ol>
+<p>总之，堆内存调优是为了在运行Java程序时，通过优化内存的分配和管理，使程序性能更好，减少内存相关的问题，提高系统的稳定性和可靠性。这对于开发和维护高性能、高可用的Java应用程序非常重要。</p>
+<h1 id="12-GC"><a href="#12-GC" class="headerlink" title="12.GC"></a>12.GC</h1>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/08/06/jvm/" data-id="clkzgtmy80000689k5laq0rn2" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2023/08/06/jvm/" data-id="clkzht6f10001he9kg7ly6bp1" data-title="jvm" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -140,7 +263,7 @@
       <ul>
         
           <li>
-            <a href="/2023/08/06/jvm/">(no title)</a>
+            <a href="/2023/08/06/jvm/">jvm</a>
           </li>
         
           <li>
